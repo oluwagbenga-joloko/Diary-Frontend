@@ -1,0 +1,12 @@
+@import '../signup/signup.component.scss';
+
+.signup-form.login-form {
+   margin-top: 70px; 
+}
+@media only screen and (max-width : 1024px) {
+    .signup-form.login-form {
+        margin-top: 30px;
+     }
+
+}
+
