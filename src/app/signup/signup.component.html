@@ -1,27 +1,27 @@
-<form class="signup-form" action="">
+<form [formGroup]="signUpForm" (ngSubmit)="onSubmit()" class="signup-form">
   <h1 class="sign-up-form-header">Register</h1>
   <div><hr class="signup-form-line"></div>
   <div class="signup-from-item">
     <label class="signup-form-item-label">First Name</label>
-    <input class="signup-form-item-input" type="text">
+    <input formControlName="firstName" class="signup-form-item-input" type="text">
   </div>
   <div class="signup-from-item">
     <label class="signup-form-item-label">Last Name</label>
-    <input class="signup-form-item-input"type="text">
+    <input formControlName="lastName" class="signup-form-item-input"type="text">
   </div>
   <div class="signup-from-item">
     <label class="signup-form-item-label">Email</label>
-    <input class="signup-form-item-input" type="text">
+    <input formControlName="email" class="signup-form-item-input" type="email">
   </div>
   <div class="signup-from-item">
     <label class="signup-form-item-label">Password</label>
-    <input class="signup-form-item-input" type="text">
+    <input formControlName="password" class="signup-form-item-input" type="password">
   </div>
   <div class="signup-from-item">
     <label class="signup-form-item-label">Password Again</label>
-    <input class="signup-form-item-input" type="text">
+    <input formControlName="rePassword" class="signup-form-item-input" type="password">
   </div>
-  <button class="signup-button extra-margin-15px">
+  <button type="submit" class="signup-button extra-margin-15px">
     Register
   </button>
   <div class="signup-button-divider ">
@@ -29,7 +29,7 @@
       <label class="signup-form-item-label">or</label>
       <hr class="signup-form-line"/>
   </div>
-  <button class="signup-button google">
+  <button type="button" class="signup-button google">
     <span class="icon"></span>
     <span class="buttonText">Sign up with Google</span>
   </button>
@@ -37,3 +37,4 @@
     <a id="signup-form-login-link"routerLink="/login">Login</a>
   </p>
 </form>
+
