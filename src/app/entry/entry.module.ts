@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { EntryListComponent } from './entry-list/entry-list.component';
+
+import { EntryRoutingModule } from './entry-routing.module';
 import { EntryDetailComponent } from './entry-detail/entry-detail.component';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    EntryRoutingModule
   ],
-  declarations: [EntryListComponent, EntryDetailComponent]
+  declarations: [EntryDetailComponent]
 })
-export class DiaryEntryModule { }
+export class EntryModule { }

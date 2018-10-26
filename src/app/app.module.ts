@@ -8,14 +8,9 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
 import { HeaderComponent } from './commons/header/header.component';
+import { AppRoutingModule } from './/app-routing.module';
+import { EntryModule } from './entry/entry.module';
 
-
-
-const appRoutes: Routes = [
-{ path: '', component: LandingPageComponent },
-{ path: 'login', component:  LoginComponent },
-{ path: 'signup', component: SignupComponent }
-]
 
 
 @NgModule({
@@ -28,10 +23,8 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(
-      appRoutes,
-      { enableTracing: true }
-    )
+    EntryModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
