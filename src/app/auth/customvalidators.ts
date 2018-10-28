@@ -1,7 +1,6 @@
 import { FormGroup, ValidatorFn, AbstractControl, ValidationErrors} from '@angular/forms'
 
 export const samePasswordValidator : ValidatorFn = (control : FormGroup): ValidationErrors | null  => {
-    console.log("Dfdfdfdfdfdfdfdfdfdfd")
     const password: string = control.get('password').value;
     const rePassword: string = control.get('rePassword').value;
     return password !== rePassword ? { "checkPassword":  "passwords do not match" } : null; 

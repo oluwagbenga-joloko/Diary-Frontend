@@ -1,15 +1,15 @@
-<!-- <form class="signup-form login-form" >
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="signup-form login-form" >
     <h1 class="sign-up-form-header">Login</h1>
     <div><hr class="signup-form-line"></div>
     <div class="signup-from-item">
       <label class="signup-form-item-label">Email</label>
-      <input class="signup-form-item-input" type="text">
+      <input formControlName="email" class="signup-form-item-input" type="text">
     </div>
     <div class="signup-from-item">
       <label class="signup-form-item-label">Password</label>
-      <input class="signup-form-item-input" type="text">
+      <input formControlName="password" class="signup-form-item-input" type="password">
     </div>
-    <button type="button" (click)="onClick()" class="signup-button extra-margin-15px">
+    <button type="submit" class="signup-button extra-margin-15px">
       Login
     </button>
     <div class="signup-button-divider ">
@@ -25,4 +25,4 @@
       <a id="signup-form-login-link"routerLink="/signup">signup</a>
     </p>
   </form>
-   -->
+  

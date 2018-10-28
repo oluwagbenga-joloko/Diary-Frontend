@@ -1,4 +1,4 @@
-@import '../../styles.scss';
+@import '../../../styles.scss';
 
 .signup-form {
     margin-top: 30px;
@@ -92,7 +92,7 @@
 }
 
 span.icon {
-    background: url('../../assets/svgs/btn_google_light_normal_ios.svg') transparent no-repeat;
+    background: url('../../../assets/svgs/btn_google_light_normal_ios.svg') transparent no-repeat;
     width: 24px;
     height: 24px;
     background-size: cover;
