@@ -4,22 +4,64 @@
   <div class="signup-from-item">
     <label class="signup-form-item-label">First Name</label>
     <input formControlName="firstName" class="signup-form-item-input" type="text">
+    <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="alert alert-danger">
+      <div class="signup-form-item-error" *ngIf="firstName.errors.required">
+        First Name is required.
+      </div>
+      <div class="signup-form-item-error" *ngIf="firstName.errors.minlength">
+        First Name must be at least 3 characters long.
+      </div>
+    </div>
   </div>
   <div class="signup-from-item">
     <label class="signup-form-item-label">Last Name</label>
     <input formControlName="lastName" class="signup-form-item-input"type="text">
+    <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="alert alert-danger">
+      <div class="signup-form-item-error" *ngIf="lastName.errors.required">
+        First Name is required.
+      </div>
+      <div class="signup-form-item-error" *ngIf="lastName.errors.minlength">
+        First Name must be at least 3 characters long.
+      </div>
+    </div>
   </div>
   <div class="signup-from-item">
     <label class="signup-form-item-label">Email</label>
-    <input formControlName="email" class="signup-form-item-input" type="email">
+    <input formControlName="email" (focus)="onEmailBlur()" [class.input-error]="errors.email" class="signup-form-item-input" type="email">
+    <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+      <div class="signup-form-item-error" *ngIf="email.errors.required">
+        email is required.
+      </div>
+      <div class="signup-form-item-error" *ngIf="email.errors.email">
+       email is invalid
+      </div>
+    </div>
+    <div class="signup-form-item-error" *ngIf="errors.email">
+        {{errors.email[0]}}
+    </div>
   </div>
-  <div class="signup-from-item">
-    <label class="signup-form-item-label">Password</label>
-    <input formControlName="password" class="signup-form-item-input" type="password">
-  </div>
-  <div class="signup-from-item">
-    <label class="signup-form-item-label">Password Again</label>
-    <input formControlName="rePassword" class="signup-form-item-input" type="password">
+  <div class="signup-from-password-group"formGroupName="passwordGroup">
+    <div class="signup-from-item">
+      <label class="signup-form-item-label">Password</label>
+      <input formControlName="password" class="signup-form-item-input" type="password">
+      <div *ngIf="password.invalid && (password.dirty || password.touched)">
+        <div class="signup-form-item-error" *ngIf="password.errors.required">
+          password is required.
+        </div>
+        <div class="signup-form-item-error" *ngIf="password.errors.invalidPassword && !password.errors.required">
+        {{ password.errors.invalidPassword}}
+        </div>
+      </div>
+    </div>
+    <div class="signup-from-item">
+      <label class="signup-form-item-label">Password Again</label>
+      <input formControlName="rePassword" class="signup-form-item-input" type="password">
+      <div *ngIf="passwordGroup.invalid && (passwordGroup.dirty || passwordGroup.touched)">
+        <div class="signup-form-item-error" *ngIf="passwordGroup.errors && passwordGroup.errors.checkPassword">
+          {{passwordGroup.errors.checkPassword}}
+        </div>
+      </div>
+    </div>
   </div>
   <button type="submit" class="signup-button extra-margin-15px">
     Register

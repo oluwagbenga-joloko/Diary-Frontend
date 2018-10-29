@@ -28,8 +28,7 @@ export class AuthService {
 
 
     // Todo send custom errors with component.
-    return throwError(
-      'Something bad happened; please try again later.');
+    return throwError(error.error);
   };
 
   signup(userDetail: UserDetail) : Observable<any> {
@@ -46,6 +45,10 @@ export class AuthService {
       retry(1),
       catchError(this.handleError)
     )
+  }
+
+  logout(): void {
+    window.localStorage.removeItem('token')
   }
 
   setAuthorizationToken(token: string): void {

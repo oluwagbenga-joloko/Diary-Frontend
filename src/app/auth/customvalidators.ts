@@ -11,6 +11,6 @@ export const validPasswordValidator: ValidatorFn = (control: AbstractControl) : 
     const reg = /^(?=.{8,32}$)(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).*/
     reg.test(control.value)
     return !reg.test(control.value) ? { "invalidPassword" : 
-    "password must be at least 8 characters long and atleast one capital leter and number"} : null;
+    "password must be at least 8 characters long and contain at least one capital leter and number"} : null;
 
 } 
