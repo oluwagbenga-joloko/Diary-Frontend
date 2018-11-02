@@ -6,3 +6,27 @@ $secondary-color: Gainsboro;
 body {
     margin: 0;
 }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+%default-button {
+    font-size: 18px;
+    padding: 3px 10px;
+    border-radius: 2px;
+    text-decoration-line: none;
+    border: 2px solid $primary-color;
+    background-color: $primary-color;
+    color: white;
+    margin-right: 10px;
+    &:hover {
+        background-color: white;
+        color: $primary-color;
+      }
+}
+.toast {
+    top: 15px;
+    opacity: 0.7;
+}

@@ -38,8 +38,8 @@ export class LoginComponent implements OnInit {
     console.log(this.loginForm)
     this.authService.login(this.loginForm.value)
     .subscribe((data: { token: string}) => {
-      // this.authService.setAuthorizationToken(data.token)
-      // this.router.navigate(['/entry'])
+      this.authService.setAuthorizationToken(data.token)
+      this.router.navigate(['/entries'])
     },
     error => {
       console.log(error)

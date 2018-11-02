@@ -3,14 +3,20 @@ import { RouterModule, Routes } from '@angular/router';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { LoginComponent } from './auth/login/login.component';
-import { AuthGuard } from './auth/auth.guard'
+import { NotauthGuard } from './auth/notauth.guard'
 
 
 const appRoutes: Routes = [
-  { path: '', component: LandingPageComponent },
-  { path: 'login', component:  LoginComponent, },
-  { path: 'signup', component: SignupComponent, }
-  ]
+  { path: '', 
+    children: [
+      { path: '', component: LandingPageComponent, },
+      { path: 'login', component:  LoginComponent, },
+      { path: 'signup', component: SignupComponent, }
+    ], 
+  canActivate: [NotauthGuard]
+  }
+]
+  
 
 @NgModule({
   imports: [

@@ -1,7 +1,30 @@
 <header>
     <nav class="navbar">
       <h1 class="navbar-logo"><a class="navbar-logo-link" routerLink="/">Diary App</a></h1>
-      <a routerLink="/login" class="navbar-button-login">Login</a>
-      <a routerLink="/signup" class="navbar-button-signup">SignUp</a>
+      <a *ngIf="!isLoggedIn" routerLink="/login" class="navbar-button-login">Login</a>
+      <a *ngIf="!isLoggedIn"routerLink="/signup" class="navbar-button-signup">SignUp</a>
+      <div *ngIf="isLoggedIn" id="navbar-user-flex" >
+        <i class="fas fa-user-circle navbar-icon"></i>
+        <p>Angello</p>
+      </div>
+      <div  *ngIf="isLoggedIn" class="submenu-container">
+        <i (click)="onBarsClick()" class="fas fa-bars navbar-icon"></i>
+        <ul *ngIf="showSubmenu" class="nav-submenu">
+          <li>
+            <a (click)="onBarsClick()" routerLink="newentry">new entry</a>
+          </li>
+          <li>
+            <a (click)="onBarsClick()" routerLink="entries">entries</a>
+          </li>
+          <hr class="signup-form-line"/>
+          <li>
+            <a href="">profile</a>
+          </li>
+          <hr class="signup-form-line"/>
+          <li>
+            <a (click)="logout()">logout</a>
+          </li>
+        </ul>
+      </div>
     </nav>
   </header>

@@ -1,0 +1,7 @@
+<section class="add-entry">
+  <form  [formGroup]="entryForm" (ngSubmit)="onSubmit()" class="add-entry-container">
+    <textarea formControlName="title"class="add-entry-title" appAutoResize placeholder="Title" name="" id="" rows="1"></textarea>
+    <textarea formControlName="content"class="add-entry-content" appAutoResize appAutoFocus placeholder="Start writing here remember, be nice!........" name="" id=""  rows="20"></textarea>
+    <button type="submit">save</button>
+  </form>
+<section>

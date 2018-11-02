@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import jwtDecode from 'jwt-decode';
 import { HttpClient, HttpResponse, HttpErrorResponse} from '@angular/common/http'
-import { Observable, throwError } from 'rxjs';
+import { Observable, throwError, Subject } from 'rxjs';
 import { retry, catchError} from 'rxjs/operators';
 import { UserDetail } from './user_detail';
 import { environment } from '../../environments/environment'
@@ -9,6 +9,10 @@ import { environment } from '../../environments/environment'
 @Injectable()
 export class AuthService {
   private AuthUrl = `${environment['baseUrl']}/users`
+
+  private authSuccessSource = new Subject();
+
+  authSuccess$ = this.authSuccessSource.asObservable()
 
   constructor(private http: HttpClient) { }
 
@@ -49,10 +53,12 @@ export class AuthService {
 
   logout(): void {
     window.localStorage.removeItem('token')
+    this.authSuccessSource.next(false)
   }
 
   setAuthorizationToken(token: string): void {
     window.localStorage.setItem("token", token)
+    this.authSuccessSource.next(true)
   }
 
   getAuthorizationToken(): string | null {

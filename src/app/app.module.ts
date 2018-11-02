@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 
 import { AppComponent } from './app.component';
@@ -11,8 +12,9 @@ import { HeaderComponent } from './commons/header/header.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { EntryModule } from './entry/entry.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
-import { AuthService } from './auth/auth.service'
-import { AuthInterceptor } from './Interceptors/auth-interceptors'
+import { AuthService } from './auth/auth.service';
+import { ToastrModule } from 'ngx-toastr';
+import { AuthInterceptor } from './Interceptors/auth-interceptors';
 
 
 
@@ -22,18 +24,22 @@ import { AuthInterceptor } from './Interceptors/auth-interceptors'
     LandingPageComponent,
     SignupComponent,
     LoginComponent,
-    HeaderComponent
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-top-center',
+    }),
+    AppRoutingModule,
     EntryModule,
-    AppRoutingModule
   ],
   providers: [
     AuthService,
-    // { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor , multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor , multi: true },
   ],
   bootstrap: [AppComponent]
 })

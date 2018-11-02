@@ -1,0 +1,43 @@
+@import '../../../styles.scss';
+
+.add-entry {
+    max-width: 1100px;
+    margin: auto;
+    margin-top: 20px;
+}
+
+.add-entry-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 800px;
+    padding-right: 10px;
+    padding-left: 10px;
+    margin: auto;
+    align-items: flex-start;
+
+    > * {
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+}
+
+.add-entry-container > button {
+    @extend %default-button;
+    align-self: flex-start;
+}
+.add-entry-container > textarea {
+    width: 100%;
+    outline: none;
+    resize: none;
+}
+.add-entry-title {
+    font-size: 30px;
+    overflow: auto;
+    border: none;
+}
+.add-entry-container > textarea.add-entry-content {
+    margin-top: 10px;
+    font-size: 16px;
+    overflow: auto;
+    border: none;
+}
