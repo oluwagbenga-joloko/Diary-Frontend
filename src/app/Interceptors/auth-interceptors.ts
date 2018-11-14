@@ -18,10 +18,10 @@ export class AuthInterceptor implements HttpInterceptor {
   Observable<HttpEvent<any>> {
 		const token = this.authService.getAuthorizationToken();
 		if (token) {
-			console.log(req)
-			const authReq = req.clone({setHeaders: { Authorization: token }})
-			next.handle(authReq)
-			console.log(authReq)
+			console.log(req.headers)
+			const authReq = req.clone({setHeaders: { "Authorization": `jwt ${token}` }})
+			console.log(authReq.headers)
+			return next.handle(authReq)
 		}
 		return next.handle(req);
   }

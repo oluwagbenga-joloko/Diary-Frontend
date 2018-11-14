@@ -8,6 +8,7 @@ import { AddEntryComponent } from './add-entry/add-entry.component';
 import { AutoResizeDirective } from './auto-resize.directive';
 import { AutoFocusDirective } from './auto-focus.directive';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DeleteModalComponent } from './delete-modal/delete-modal.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     EntryRoutingModule
   ],
-  declarations: [EntryDetailComponent, EntryListComponent, AddEntryComponent, AutoResizeDirective, AutoFocusDirective]
+  declarations: [EntryDetailComponent, EntryListComponent, AddEntryComponent, AutoResizeDirective, AutoFocusDirective, DeleteModalComponent],
+  entryComponents: [DeleteModalComponent]
 })
 export class EntryModule { }

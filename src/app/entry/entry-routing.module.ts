@@ -11,7 +11,8 @@ const routes: Routes = [
     children: [
       { path: 'entry/:id', component: EntryDetailComponent },
       { path: 'entries', component: EntryListComponent },
-      { path: 'newentry', component:  AddEntryComponent }
+      { path: 'newentry', component:  AddEntryComponent, data: {edit: false} },
+      {path:  'editEntry/:id', component: AddEntryComponent, data: {edit: true}}
     ],
     canActivate: [AuthGuard],
   }

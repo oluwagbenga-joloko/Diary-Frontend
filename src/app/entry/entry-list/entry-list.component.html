@@ -3,7 +3,7 @@
     <h1>
       Entries
     </h1>
-    <a href="">Add Entry</a>
+    <a href="" routerLink="/newentry">Add Entry</a>
   </div>
   <div class="entry-list-filter">
     <div class="entry-list-filter-date">
@@ -33,23 +33,20 @@
     </div>
   </div>
   <div>
-    <div class="entry-list-item">
+    <div class="entry-list-item" *ngFor="let entry of entries">
       <h4>
-        <a href="">lorem ipsum Lorem ipsum dolor sit amet, consectetur adipiscing elit</a>
+        <a  [routerLink]="['/entry/', entry.id]">{{entry.title}}</a>
       </h4>
       <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-          incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo 
-          consequat. Duis aute irure dolor in reprehenderit 
+        {{entry.content}}
       </p>
       <div class="entry-list-item-date">
         <p>
-          last updated on sept 7, 2018
+          last updated on {{entry.updatedAt | date:"h:mm a, MMM d, yyyy"}}
         </p>
         <div class="icon-container">
-          <i class="fas fa-edit"></i>
-          <i class="fas fa-trash-alt"></i>
+          <a [routerLink]="['/editEntry', entry.id]"><i class="fas fa-edit"></i></a>
+          <i class="fas fa-trash-alt" (click)="showDeleteModal(entry.id)"> </i>
         </div>
       </div>
       <hr>

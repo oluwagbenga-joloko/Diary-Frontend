@@ -1,0 +1,16 @@
+<div class="modal">
+    <i  class="fas fa-times modal-icon" (click)="closed.next()"></i>
+    <main class="modal-main">
+        <h1>Delete</h1>
+        <p>Are you sure you want to delete this entry ?</p>
+        <div>
+        <button type="button" (click)="delete()">
+         delete
+        </button>
+        <button type="button" (click)="closed.next()">
+            cancel
+        </button>
+      </div>
+
+      </main>
+</div>

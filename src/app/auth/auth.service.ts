@@ -38,7 +38,7 @@ export class AuthService {
   signup(userDetail: UserDetail) : Observable<any> {
     return this.http.post(`${this.AuthUrl}/`, userDetail)
     .pipe(
-      retry(1),
+      // retry(1),
       catchError(this.handleError)
     );
   }
@@ -46,7 +46,7 @@ export class AuthService {
   login(userDetail : UserDetail): Observable<any> {
     return this.http.post(`${this.AuthUrl}/login/`, userDetail)
     .pipe(
-      retry(1),
+      // retry(1),
       catchError(this.handleError)
     )
   }
