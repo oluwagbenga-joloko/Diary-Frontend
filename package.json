@@ -21,9 +21,12 @@
     "@angular/platform-browser": "7.0.1",
     "@angular/platform-browser-dynamic": "7.0.1",
     "@angular/router": "7.0.1",
+    "@types/gapi": "0.0.36",
+    "@types/gapi.auth2": "0.0.48",
     "core-js": "^2.4.1",
     "jwt-decode": "^2.2.0",
     "moment": "^2.22.2",
+    "ngx-infinite-scroll": "^6.0.1",
     "ngx-toastr": "^9.1.1",
     "rxjs": "^6.3.3",
     "zone.js": "^0.8.26"

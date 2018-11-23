@@ -4,3 +4,7 @@ export interface UserDetail {
     password: string,
     email: string
 }
+
+export interface GoogleAuthResult {
+    Zi:  {id_token: string }
+}

@@ -31,8 +31,6 @@ export class AddEntryComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    console.log(this.entryService.entry)
-    console.log(this.route)
     this.route.data.subscribe(
       (data: {edit: boolean})=> {
         this.edit = data.edit

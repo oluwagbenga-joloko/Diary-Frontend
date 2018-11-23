@@ -21,17 +21,23 @@ export class DeleteModalComponent implements OnInit {
   delete() {
     this.entryService.deleteEntry(this.id).subscribe(
       (_) => {
-        this.entryService.getEntries().subscribe(
-          (result) => {
-            this.entryService.getEntriesOnDeleteSource.next(result)
-            this.toastr.success("entry deleted succesfully")
-          },
-          (error) => console.log(error),
-          () => {
-            this.closed.next()
-          }
-        )
-      },
+        this.closed.next()
+        this.toastr.success("entry deleted succesfully")
+        this.entryService.getEntriesOnDeleteSource.next(this.id)
+      }
+      // {
+      //   this.entryService.getEntries().subscribe(
+      //     (result) => {
+      //       this.entryService.getEntriesOnDeleteSource.next(result)
+      //       this.toastr.success("entry deleted succesfully")
+      //     },
+      //     (error) => console.log(error),
+      //     () => {
+      //       this.closed.next()
+      //     }
+      //   )
+      // }
+      ,
       (error) => {
         this.closed.next()
         console.log(error)

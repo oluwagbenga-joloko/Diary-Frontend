@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { Router , ActivatedRoute } from '@angular/router'
 import { FormBuilder, Validators } from '@angular/forms'
 import { AuthService } from "../auth.service";
 import { UserDetail } from "../user_detail";
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -17,40 +18,50 @@ export class LoginComponent implements OnInit {
     password: ['mark2@gmail.com', [Validators.required, Validators.minLength(4)]]
   })
 
+  isLoading: boolean = false
+
   constructor(private router: Router,
     private activatedRoute : ActivatedRoute, 
     private fb: FormBuilder,
-    private authService: AuthService
+    public authService: AuthService,
+    public ngZone: NgZone
     ) { 
-
   }
 
   ngOnInit() {
     this.loginForm.valueChanges.subscribe( data => {
-      console.log(data)
       if (this.errors["nonFieldErrors"]) {
         delete this.errors["nonFieldErrors"]
       }
     })
   }
 
-  onSubmit() {
-    console.log(this.loginForm)
-    this.authService.login(this.loginForm.value)
-    .subscribe((data: { token: string}) => {
-      this.authService.setAuthorizationToken(data.token)
-      this.router.navigate(['/entries'])
+  LoginSubscribeObj = {
+    next: (data: { token: string}) => {
+      this.ngZone.run(()=> {
+        this.authService.setAuthorizationToken(data.token)
+        this.router.navigate(['/entries'])
+      })
     },
-    error => {
-      console.log(error)
+    error: error => {
       this.errors = error
-      console.log(this.errors)
       }
-    )
   }
+
+  onSubmit() {
+    this.isLoading = true
+    this.authService.login(this.loginForm.value)
+    .pipe(finalize(() => this.isLoading = false))
+    .subscribe(this.LoginSubscribeObj)}
 
   get email() { return this.loginForm.get('email') }
   
   get password() { return this.loginForm.get('password') }
 
+  googleButtonPress() {
+    this.isLoading = true
+    this.authService.googleAuth()
+    .pipe(finalize(() => this.isLoading = false))
+    .subscribe(this.LoginSubscribeObj)
+  }
 }

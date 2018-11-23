@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { EntryService } from '../entry.service'
 import {Entry} from '../entry';
 import {ModalService} from '../modal.service';
+import { Subscription }   from 'rxjs';
 
 
 @Component({
@@ -13,6 +14,7 @@ import {ModalService} from '../modal.service';
 export class EntryDetailComponent implements OnInit {
 
   entry: Entry;
+  deleteSubscription: Subscription;
 
   constructor(private route: ActivatedRoute,
     private router: Router,
@@ -23,11 +25,22 @@ export class EntryDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    let id = this.route.snapshot.paramMap.get('id')
+    const id = this.route.snapshot.paramMap.get('id')
     this.entryService.getCacheEntry(id).subscribe(
       (entry) => {this.entry = entry; console.log(entry);},
       (error) =>  console.log(error)
     )
+    this.deleteSubscription =  this.entryService.getEntriesOnDelete$.subscribe(
+      (_) => {
+        setTimeout(()=> {
+          this.router.navigate(['/entries'])
+        }, 10)
+      },
+    )
+  }
+  ngOnDestroy() {
+    this.deleteSubscription.unsubscribe()
+
   }
   
   onEditClick() {

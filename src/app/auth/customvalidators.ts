@@ -12,5 +12,12 @@ export const validPasswordValidator: ValidatorFn = (control: AbstractControl) : 
     reg.test(control.value)
     return !reg.test(control.value) ? { "invalidPassword" : 
     "password must be at least 8 characters long and contain at least one capital leter and number"} : null;
-
 } 
+
+
+export const ValidateFilterFormDate: ValidatorFn = (control: FormGroup): ValidationErrors | null => {
+    console.log('dfdfddfdff')
+    const beginDate: Date = new Date(control.get('beginDate').value);
+    const endDate: Date = new Date(control.get('endDate').value);
+    return endDate < beginDate ? {"dateRange": "begin date greater than end date"}: null;
+}

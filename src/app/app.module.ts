@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-
+import {DatePipe} from '@angular/common'
 
 import { AppComponent } from './app.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
@@ -15,6 +15,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { AuthService } from './auth/auth.service';
 import { ToastrModule } from 'ngx-toastr';
 import { AuthInterceptor } from './Interceptors/auth-interceptors';
+import { NotFoundPageComponent } from './commom/not-found-page/not-found-page.component';
+import { HorizonalLoaderComponent } from './commons/horizonal-loader/horizonal-loader.component';
 
 
 
@@ -25,6 +27,8 @@ import { AuthInterceptor } from './Interceptors/auth-interceptors';
     SignupComponent,
     LoginComponent,
     HeaderComponent,
+    NotFoundPageComponent,
+    HorizonalLoaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,10 +38,11 @@ import { AuthInterceptor } from './Interceptors/auth-interceptors';
     ToastrModule.forRoot({
       positionClass: 'toast-top-center',
     }),
-    AppRoutingModule,
     EntryModule,
+    AppRoutingModule,
   ],
   providers: [
+    DatePipe,
     AuthService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor , multi: true },
   ],

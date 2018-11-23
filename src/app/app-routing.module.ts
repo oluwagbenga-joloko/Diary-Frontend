@@ -4,6 +4,8 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { LoginComponent } from './auth/login/login.component';
 import { NotauthGuard } from './auth/notauth.guard'
+import { NotFoundPageComponent } from './commom/not-found-page/not-found-page.component';
+
 
 
 const appRoutes: Routes = [
@@ -11,10 +13,11 @@ const appRoutes: Routes = [
     children: [
       { path: '', component: LandingPageComponent, },
       { path: 'login', component:  LoginComponent, },
-      { path: 'signup', component: SignupComponent, }
+      { path: 'signup', component: SignupComponent, },
     ], 
   canActivate: [NotauthGuard]
-  }
+  },
+  { path: '**', component: NotFoundPageComponent }
 ]
   
 

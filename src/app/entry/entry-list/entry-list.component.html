@@ -6,33 +6,31 @@
     <a href="" routerLink="/newentry">Add Entry</a>
   </div>
   <div class="entry-list-filter">
-    <div class="entry-list-filter-date">
+    <form role="form" [formGroup]="filterForm" (ngSubmit)="onFilter()" class="entry-list-filter-date">
       <p>Date Added</p>
       <div>
         <label for="">from:</label>
-        <input type="date">
+        <input formControlName="beginDate" type="date" [max]="maxDate" required>
       </div>
       <div>
         <label for="">to:</label>
-        <input type="date">
+        <input formControlName="endDate" type="date"  [max]="maxDate" required>
       </div>
-      <button>Apply Filter</button>
-    </div>
+      <button type="submit">Apply Filter</button>
+      <a *ngIf="showFilterClear" id='clear-filter' (click)="onFilterClear()"> Clear Filter</a>
+    </form>
     <div class="entry-list-filter-sort">
       <p>Sort By:</p>
       <div>
-        <select name="" id="">
-            <option value="">
-              date Addded (newest first)
+        <select [formControl]="sortControl" name="" id="">
+            <option *ngFor="let option of sortOptions" [ngValue]="option">
+              {{option.text}}
             </option>
-            <option value="">
-                date Addded (oldest first)
-              </option>
         </select>
-        </div>
+      </div>
     </div>
   </div>
-  <div>
+  <div  infiniteScroll [infiniteScrollDistance]="1" [infiniteScrollThrottle]="50" (scrolled)="onScroll()" >
     <div class="entry-list-item" *ngFor="let entry of entries">
       <h4>
         <a  [routerLink]="['/entry/', entry.id]">{{entry.title}}</a>
@@ -51,68 +49,8 @@
       </div>
       <hr>
     </div>
-    <div class="entry-list-item">
-        <h4>
-          lorem ipsum Lorem ipsum dolor sit amet, consectetur adipiscing elit
-        </h4>
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo 
-            consequat. Duis aute irure dolor in reprehenderit 
-        </p>
-        <div class="entry-list-item-date">
-          <p>
-            last updated on sept 7, 2018
-          </p>
-          <div class="icon-container">
-            <i class="fas fa-edit"></i>
-            <i class="fas fa-trash-alt"></i>
-          </div>
-        </div>
-        <hr>
-    </div>
-    <div class="entry-list-item">
-        <h4>
-          lorem ipsum Lorem ipsum dolor sit amet, consectetur adipiscing elit
-        </h4>
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo 
-            consequat. Duis aute irure dolor in reprehenderit 
-        </p>
-        <div class="entry-list-item-date">
-          <p>
-            last updated on sept 7, 2018
-          </p>
-          <div class="icon-container">
-            <i class="fas fa-edit"></i>
-            <i class="fas fa-trash-alt"></i>
-          </div>
-        </div>
-        <hr>
-    </div>
-    <div class="entry-list-item">
-        <h4>
-          lorem ipsum Lorem ipsum dolor sit amet, consectetur adipiscing elit
-        </h4>
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo 
-            consequat. Duis aute irure dolor in reprehenderit 
-        </p>
-        <div class="entry-list-item-date">
-          <p>
-            last updated on sept 7, 2018
-          </p>
-          <div class="icon-container">
-            <i class="fas fa-edit"></i>
-            <i class="fas fa-trash-alt"></i>
-          </div>
-        </div>
-        <hr>
-    </div>
   </div>
 <section>
+<p *ngIf="noEntries"class="norecords">You have not Created any diary entries</p>
+<p *ngIf="showNoFilter" class="norecords"> No entries exist that match filter date</p>
+<app-bar-loader *ngIf="isLoading"></app-bar-loader>

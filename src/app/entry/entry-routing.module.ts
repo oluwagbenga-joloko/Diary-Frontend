@@ -7,16 +7,11 @@ import { AddEntryComponent } from './add-entry/add-entry.component';
 import { AuthGuard } from '../auth/auth.guard'
 
 const routes: Routes = [
-  { path: '',
-    children: [
-      { path: 'entry/:id', component: EntryDetailComponent },
-      { path: 'entries', component: EntryListComponent },
-      { path: 'newentry', component:  AddEntryComponent, data: {edit: false} },
-      {path:  'editEntry/:id', component: AddEntryComponent, data: {edit: true}}
-    ],
-    canActivate: [AuthGuard],
-  }
-];
+      { path: 'entry/:id', component: EntryDetailComponent, canActivate: [AuthGuard]},
+      { path: 'entries', component: EntryListComponent, canActivate: [AuthGuard] },
+      { path: 'newentry', component:  AddEntryComponent, data: {edit: false}, canActivate: [AuthGuard] },
+      { path:  'editEntry/:id', component: AddEntryComponent, data: {edit: true}, canActivate: [AuthGuard]}
+    ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

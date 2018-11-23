@@ -1,4 +1,5 @@
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="signup-form login-form" >
+<div class="form-container">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="signup-form login-form" >
     <h1 class="sign-up-form-header">Login</h1>
     <div><hr class="signup-form-line"></div>
     <div class="login-form-error" *ngIf="errors.nonFieldErrors">
@@ -33,12 +34,16 @@
         <label class="signup-form-item-label">or</label>
         <hr class="signup-form-line"/>
     </div>
-    <button class="signup-button google">
+    <button type="button" class="signup-button google">
       <span class="icon"></span>
-      <span class="buttonText">Login with Google</span>
+      <span class="buttonText" (click)='googleButtonPress()'>Login with Google</span>
     </button>
     <p class="extra-margin-15px"> Not Registered ? 
       <a id="signup-form-login-link"routerLink="/signup">signup</a>
     </p>
   </form>
+  <div *ngIf="isLoading" class="loader-container">
+    <app-horizonal-loader></app-horizonal-loader>
+  </div>
+</div>
   

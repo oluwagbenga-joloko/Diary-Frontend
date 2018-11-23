@@ -6,6 +6,10 @@ header {
     padding-right: 10px;
     // border-bottom: gainsboro solid 0.2px;
      box-shadow: 0px 10px 20px -19px #3f1dcb;
+     position: fixed;
+     top: 0;
+     width: 100%;
+     z-index: 40;
 
 }
 
@@ -118,4 +122,7 @@ header {
  .nav-submenu > hr {
     border-color: rgba(0, 0, 0, 0.3);
     border-width: 0.5px;
+ }
+ #headerPadding {
+    padding-top: 70px
  }

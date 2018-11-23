@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from "@angular/common/http"
+import { HttpClient, HttpErrorResponse, HttpParams } from "@angular/common/http"
 import { Observable, throwError, Subject, of } from "rxjs"
 import { retry, catchError, map, mergeMap, flatMap, first, switchMap } from 'rxjs/operators';
 import { environment } from '../../environments/environment'
@@ -14,7 +14,7 @@ export class EntryService {
   private entryUrl = `${environment['baseUrl']}/entries`;
 
 
-  getEntriesOnDeleteSource = new Subject<{results:Entry[]}>()
+  getEntriesOnDeleteSource = new Subject<string>()
   getEntriesOnDelete$ = this.getEntriesOnDeleteSource.asObservable()
 
   constructor(private http: HttpClient) { }
@@ -43,8 +43,17 @@ export class EntryService {
     )
   }
 
-  getEntries(): Observable<any> {
-    return this.http.get<any>(`${this.entryUrl}/`).pipe(
+  getEntries(params: {[key: string]: string}): Observable<any> {
+    let httpParams =  new HttpParams()
+
+    for (let key in params){
+      if (params[key] !== '') {
+        httpParams = httpParams.set(key, params[key])
+      }
+    }
+
+    
+    return this.http.get<any>(`${this.entryUrl}/`, {params: httpParams}).pipe(
       map(result => {
         if (this.entry) {
           this.entry = undefined
@@ -83,15 +92,13 @@ export class EntryService {
     return this.getEntry(id).pipe(
       map(
         (entry) => {
-          this.entry = entry
-          return entry
-        },
-        (error) => {
-          throw(error)
+          console.log();
+          this.entry = entry;
+          return entry;
         })
       )
     } else {
-      return of(this.entry)
+      return of(this.entry);
     }
-  }
+  } 
 }
